@@ -1,4 +1,32 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="app">
-  Start coding!!!
+  <div class="container">
+    <div class="search-form">
+      <input type="search" placeholder="Search..." [formControl]="searchControl">
+    </div>
+    <div class="launch__wrapper"
+      infiniteScroll
+      [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollThrottle]="scrollThrottle"
+      [scrollWindow]="false"
+      (scrolled)="onScroll()">
+      <div class="launch__list">
+        <app-launch-item
+          class="fade"
+          *ngFor="let launch of launches | async"
+          [launch]="launch"
+          [@launchAnimation]></app-launch-item>
+        <app-spinner
+          *ngIf="(isLoaded | async) === false && !hasFiltered"></app-spinner>
+          <p class="max-reached" *ngIf="hasFiltered" [ngPlural]="(launches | async).length">
+            <ng-template ngPluralCase="=0">No filtered launches</ng-template>
+            <ng-template ngPluralCase="=1">Filtered 1 launch</ng-template>
+            <ng-template ngPluralCase="other">Filtered {{ (launches | async).length }} launches</ng-template>
+          </p>
+        <p class="max-reached" *ngIf="(isLoaded | async) && !hasFiltered">
+          End of list. Queried {{ (launches | async).length }} launches
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

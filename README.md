@@ -1,4 +1,8 @@
-# JS Code Test
+# Angular Code Test
+
+> Done by Reinier Santos
+
+- For submission as coding exam
 
 This code test will determine your approach on solving problems.
 

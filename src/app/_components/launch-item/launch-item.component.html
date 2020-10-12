@@ -1,0 +1,50 @@
+<div class="launch__item">
+  <div class="item-header">
+    <h2>{{ launch?.mission_name || 'None' }}</h2>
+    <span class="launch__status launch__status--info status" *ngIf="launch?.upcoming || false">{{ UPCOMING }}</span>
+
+    <ng-container *ngIf="!(launch?.upcoming || false)">
+      <span class="launch__status launch__status--success status" *ngIf="launch?.launch_success">{{ SUCCESS }}</span>
+      <span class="launch__status launch__status--danger status" *ngIf="!launch?.launch_success">{{ FAILED }}</span>
+    </ng-container>
+
+  </div>
+
+  <div class="launch__body" *ngIf="isVisible">
+    <div class="launch__meta">
+      <span class="launch__meta-item" title="{{ launch?.launch_date_utc | date: 'mediumDate' }}">{{ launchDate() }}</span>
+      <a class="launch__meta-item"
+        href="{{ launch?.links?.video_link }}"
+        target="_blank"
+        rel="noopener"
+        *ngIf="!!launch?.links?.video_link">Video</a>
+      <a class="launch__meta-item"
+        href="{{ launch?.links?.article_link }}"
+        target="_blank"
+        rel="noopener"
+        *ngIf="!!launch?.links?.article_link">Article</a>
+      <a class="launch__meta-item"
+        href="{{ launch?.links?.wikipedia }}"
+        target="_blank"
+        rel="noopener"
+        *ngIf="!!launch?.links?.wikipedia">Wikipedia</a>
+    </div>
+    <div class="launch__details">
+      <div class="media">
+        <img
+          [src]="launch?.links?.mission_patch_small"
+          [alt]="launch?.mission_name"
+          *ngIf="!!launch?.links?.mission_patch_small">
+        <p>
+          {{ launch?.details || 'None' }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="launch__action">
+    <button class="btn btn--primary" (click)="showHideContent()">
+      {{ isVisible ? HIDE : VIEW }}
+    </button>
+  </div>
+</div>

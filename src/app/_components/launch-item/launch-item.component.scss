@@ -1,0 +1,12 @@
+.item-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.status {
+  margin-left: 10px;
+  font-size: 0.75em;
+  font-weight: 500;
+  border-radius: 0.25rem;
+}
